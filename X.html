@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>X Clone</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #000;
+      color: #fff;
+      display: flex;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 25%;
+      padding: 20px;
+      border-right: 1px solid #333;
+    }
+
+    .sidebar h2 {
+      font-size: 24px;
+    }
+
+    .sidebar p {
+      margin: 15px 0;
+      cursor: pointer;
+    }
+
+    /* Feed */
+    .feed {
+      width: 50%;
+      border-right: 1px solid #333;
+    }
+
+    .tweet-box {
+      padding: 15px;
+      border-bottom: 1px solid #333;
+    }
+
+    textarea {
+      width: 100%;
+      height: 60px;
+      background: #111;
+      color: #fff;
+      border: none;
+      padding: 10px;
+      resize: none;
+    }
+
+    button {
+      background: #1da1f2;
+      border: none;
+      padding: 8px 15px;
+      color: white;
+      border-radius: 20px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+
+    .tweet {
+      padding: 15px;
+      border-bottom: 1px solid #333;
+    }
+
+    .like-btn {
+      margin-top: 10px;
+      cursor: pointer;
+      color: gray;
+    }
+
+    .like-btn:hover {
+      color: red;
+    }
+
+    /* Right panel */
+    .right {
+      width: 25%;
+      padding: 20px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2>X Clone</h2>
+    <p>Home</p>
+    <p>Explore</p>
+    <p>Notifications</p>
+    <p>Profile</p>
+  </div>
+
+  <!-- Feed -->
+  <div class="feed">
+    <div class="tweet-box">
+      <textarea id="tweetInput" placeholder="What's happening?"></textarea>
+      <button onclick="postTweet()">Post</button>
+    </div>
+
+    <div id="tweets"></div>
+  </div>
+
+  <!-- Right -->
+  <div class="right">
+    <h3>Trends</h3>
+    <p>#Startup</p>
+    <p>#AI</p>
+    <p>#Business</p>
+  </div>
+
+  <script>
+    function postTweet() {
+      const input = document.getElementById("tweetInput");
+      const text = input.value;
+
+      if (text === "") return;
+
+      const tweetDiv = document.createElement("div");
+      tweetDiv.className = "tweet";
+
+      tweetDiv.innerHTML = `
+        <p>${text}</p>
+        <div class="like-btn" onclick="likeTweet(this)">
+          ❤️ <span>0</span>
+        </div>
+      `;
+
+      document.getElementById("tweets").prepend(tweetDiv);
+      input.value = "";
+    }
+
+    function likeTweet(element) {
+      const span = element.querySelector("span");
+      let count = parseInt(span.innerText);
+      span.innerText = count + 1;
+    }
+  </script>
+
+</body>
+</html>
